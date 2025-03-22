@@ -1,0 +1,26 @@
+{% load static %}  <!-- Add this line to load static files -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Details</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}"> <!-- Link to the CSS file -->
+</head>
+<body>
+    <div class="container">
+        <h1>Task Details</h1>
+
+        <div class="task-details">
+            <h2>{{ task.title }}</h2> <!-- Display task title -->
+            <p><strong>Description:</strong> {{ task.description }}</p> <!-- Display task description -->
+            <p><strong>Due Date:</strong> {{ task.due_date }}</p> <!-- Display due date -->
+            <p><strong>Due Time:</strong> {{ task.due_time }}</p> <!-- Display due time -->
+            <p><strong>Status:</strong> {{ task.status }}</p> <!-- Display task status -->
+
+            <a href="{% url 'task_list' %}">Back to Task List</a>
+            <!-- Correct example of linking to task detail page -->
+            <a href="{% url 'task-detail' task.id %}">View Details</a>
+
+

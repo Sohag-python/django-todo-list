@@ -1,0 +1,5 @@
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}  <!-- This will render all form fields, including due_date as a date picker -->
+    <button type="submit">Save Task</button>
+</form>

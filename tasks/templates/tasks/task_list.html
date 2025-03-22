@@ -1,0 +1,53 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task List</title>
+    <link rel="stylesheet" href="{% static 'tasks/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Task List</h1>
+
+        <ul>
+            {% for task in tasks %}
+                <li>
+                    <a href="{% url 'task-detail' task.id %}">{{ task.title }}</a>
+
+                </li>
+            {% endfor %}
+        </ul>
+
+        <a href="{% url 'task-create' %}">Create New Task</a>
+
+    </div>
+    <!-- tasks/task_list.html -->
+<form method="get" action="{% url 'task-list' %}">
+    <input type="text" name="q" placeholder="Search tasks" value="{{ request.GET.q }}">
+    <select name="status">
+        <option value="">All Statuses</option>
+        <option value="pending" {% if request.GET.status == 'pending' %}selected{% endif %}>Pending</option>
+        <option value="completed" {% if request.GET.status == 'completed' %}selected{% endif %}>Completed</option>
+    </select>
+    <button type="submit">Search</button>
+</form>
+
+<ul>
+    {% for task in tasks %}
+        <li>
+            <a href="{% url 'task-detail' task.id %}">{{ task.title }}</a>
+            <a href="{% url 'task-delete' task.id %}">Delete Task</a>
+
+        </li>
+    {% empty %}
+        <p>No tasks available.</p>
+    {% endfor %}
+</ul>
+
+   
+
+</body>
+</html>
